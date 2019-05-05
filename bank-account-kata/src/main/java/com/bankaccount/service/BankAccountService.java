@@ -28,4 +28,9 @@ public class BankAccountService {
 		}
 	}
 
+	public void deposit(BigDecimal depositAmount) {
+		
+		
+	}
+
 }

@@ -16,6 +16,7 @@ import org.junit.Test;
 
 public class TestBankAccountService implements DateUtils {
 
+
 	@Test
 	public void testWithdrawalNormalScenario() {
 		final BigDecimal balance = BigDecimal.valueOf(100);
@@ -34,7 +35,7 @@ public class TestBankAccountService implements DateUtils {
 		assertThat(format(transaction.getDate()), is(format(new Date())));
 		assertThat(transaction.getBalance(), expextedBalance);
 	}
-	
+
 	@Test(expected = UnsuffcientBalanceException.class)
 	public void testWithdrawalUnsufficientBalance() {
 		Account account = new Account("ACC1", "CUST1", BigDecimal.valueOf(100));
@@ -42,5 +43,25 @@ public class TestBankAccountService implements DateUtils {
 		final BankAccountService bankAccountService = new BankAccountService(account);
 		bankAccountService.withdraw(BigDecimal.valueOf(1000));
 	}
-	
+
+	@Test
+	public void testDeposit() {
+		final BigDecimal balance = BigDecimal.valueOf(100);
+		Account account = new Account("ACC1", "CUST1", balance);
+
+
+		final BankAccountService bankAccountService = new BankAccountService(account);
+		final BigDecimal depositAmount = BigDecimal.valueOf(200);
+		bankAccountService.deposit(depositAmount);
+
+		final BigDecimal expectedBalance = BigDecimal.valueOf(300);
+
+		assertThat(account.getBalance(), is(expectedBalance));
+		assertThat(account.getTransactionList().size(), is(1));
+		final Transaction transaction = account.getTransactionList().get(0);
+		assertThat(transaction.getAmount(), is(depositAmount));
+		assertThat(transaction.getOperation(), is(Operation.DEPOSIT));
+		assertThat(format(transaction.getDate()), is(format(new Date())));
+		assertThat(transaction.getBalance(), is(expectedBalance));
+	}
 }
