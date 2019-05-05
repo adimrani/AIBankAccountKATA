@@ -1,5 +1,6 @@
 package com.bankaccount.domain;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,11 +10,11 @@ public class Account {
 
 	private final String customerId;
 
-	private final Amount balance;
+	private  BigDecimal balance;
 
 	private final List<Transaction> transactionList =  new ArrayList<Transaction>();
 
-	public Account(String id, String customerId, Amount balance) {
+	public Account(String id, String customerId, BigDecimal balance) {
 		this.id = id;
 		this.customerId = customerId;
 		this.balance = balance;
@@ -27,7 +28,11 @@ public class Account {
 		return customerId;
 	}
 
-	public Amount getBalance() {
+	public void setBalance(BigDecimal balance) {
+		this.balance = balance;
+	}
+
+	public BigDecimal getBalance() {
 		return balance;
 	}
 

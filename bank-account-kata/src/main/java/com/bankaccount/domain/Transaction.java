@@ -11,10 +11,13 @@ public class Transaction {
 
 	private final Operation operation;
 
-	public Transaction(Date date, BigDecimal amount, Operation operation) {
+	private final BigDecimal balance;
+
+	public Transaction(Date date, BigDecimal amount, Operation operation, BigDecimal balance) {
 		this.date = date;
 		this.amount = amount;
 		this.operation = operation;
+		this.balance = balance;
 	}
 
 	public Date getDate() {
@@ -27,5 +30,9 @@ public class Transaction {
 
 	public Operation getOperation() {
 		return operation;
+	}
+
+	public BigDecimal getBalance() {
+		return balance;
 	}
 }
