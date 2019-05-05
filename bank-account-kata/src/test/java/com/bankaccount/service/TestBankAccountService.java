@@ -49,7 +49,6 @@ public class TestBankAccountService implements DateUtils {
 		final BigDecimal balance = BigDecimal.valueOf(100);
 		Account account = new Account("ACC1", "CUST1", balance);
 
-
 		final BankAccountService bankAccountService = new BankAccountService(account);
 		final BigDecimal depositAmount = BigDecimal.valueOf(200);
 		bankAccountService.deposit(depositAmount);

@@ -1,8 +1,10 @@
 package com.bankaccount.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.bankaccount.domain.Account;
+import com.bankaccount.domain.Transaction;
 import com.bankaccount.utils.DateUtils;
 
 public class AccountHistory implements DateUtils {
@@ -14,10 +16,12 @@ public class AccountHistory implements DateUtils {
 		this.account = account;
 	}
 
-
 	public List<String> getHistory() {
 		
-		return null;
+		final List<Transaction> transactionList = account.getTransactionList();
+		return transactionList.stream()
+				.map(tx -> tx.getOperation().toString() + ", " + format(tx.getDate()) + ", " + tx.getAmount().toEngineeringString() + ", " + tx.getBalance())
+				.collect(Collectors.toList());
 	}
 
 }
