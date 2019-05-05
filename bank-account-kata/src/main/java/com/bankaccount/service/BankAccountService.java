@@ -29,8 +29,9 @@ public class BankAccountService {
 	}
 
 	public void deposit(BigDecimal depositAmount) {
-		
-		
+		bankAccount.setBalance(bankAccount.getBalance().add(depositAmount));
+		Transaction depositTransaction = new Transaction(new Date(), depositAmount, Operation.DEPOSIT, bankAccount.getBalance());
+		bankAccount.getTransactionList().add(depositTransaction);
 	}
 
 }
