@@ -9,6 +9,7 @@ import java.util.Date;
 import com.bankaccount.domain.Account;
 import com.bankaccount.domain.Operation;
 import com.bankaccount.domain.Transaction;
+import com.bankaccount.exception.UnsuffcientBalanceException;
 import com.bankaccount.utils.DateUtils;
 import org.hamcrest.Matcher;
 import org.junit.Test;
@@ -32,6 +33,14 @@ public class TestBankAccountService implements DateUtils {
 		assertThat(transaction.getOperation(), is(Operation.WITHDRAWAL));
 		assertThat(format(transaction.getDate()), is(format(new Date())));
 		assertThat(transaction.getBalance(), expextedBalance);
+	}
+	
+	@Test(expected = UnsuffcientBalanceException.class)
+	public void testWithdrawalUnsufficientBalance() {
+		Account account = new Account("ACC1", "CUST1", BigDecimal.valueOf(100));
+
+		final BankAccountService bankAccountService = new BankAccountService(account);
+		bankAccountService.withdraw(BigDecimal.valueOf(1000));
 	}
 	
 }

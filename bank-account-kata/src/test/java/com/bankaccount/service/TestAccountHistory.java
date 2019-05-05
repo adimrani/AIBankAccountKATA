@@ -1,5 +1,7 @@
 package com.bankaccount.service;
 
-public class TestAccountHistory {
+import com.bankaccount.utils.DateUtils;
+
+public class TestAccountHistory implements DateUtils {
 
 }
