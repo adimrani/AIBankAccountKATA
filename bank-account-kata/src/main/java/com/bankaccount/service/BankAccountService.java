@@ -9,13 +9,13 @@ import com.bankaccount.domain.Transaction;
 import com.bankaccount.exception.UnsuffcientBalanceException;
 
 public class BankAccountService {
-	
+
 	private final Account bankAccount;
 
 	public BankAccountService(Account bankAccount) {
 		this.bankAccount = bankAccount;
 	}
-	
+
 	public void withdraw(BigDecimal withdrawalAmount) {
 		final BigDecimal actualBalanceValue = bankAccount.getBalance();
 		if (actualBalanceValue.compareTo(withdrawalAmount) > 0) {
