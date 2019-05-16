@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.bankaccount.domain.Account;
+import com.bankaccount.exception.UnsuffcientBalanceException;
 import com.bankaccount.utils.DateUtils;
 import org.junit.Test;
 
@@ -16,7 +17,7 @@ public class TestAccountHistory implements DateUtils {
 
 
 	@Test
-	public void shouldPrintHistory() {
+	public void shouldPrintHistory() throws UnsuffcientBalanceException {
 		final BigDecimal balance = BigDecimal.valueOf(100);
 		Account account = new Account("ACC1", "CUST1", balance);
 		final BankAccountService bankAccountService = new BankAccountService(account);

@@ -18,7 +18,7 @@ public class TestBankAccountService implements DateUtils {
 
 
 	@Test
-	public void testWithdrawalNormalScenario() {
+	public void testWithdrawalNormalScenario() throws UnsuffcientBalanceException{
 		final BigDecimal balance = BigDecimal.valueOf(100);
 		Account account = new Account("ACC1", "CUST1", balance);
 
@@ -37,7 +37,7 @@ public class TestBankAccountService implements DateUtils {
 	}
 
 	@Test(expected = UnsuffcientBalanceException.class)
-	public void testWithdrawalUnsufficientBalance() {
+	public void testWithdrawalUnsufficientBalance() throws UnsuffcientBalanceException {
 		Account account = new Account("ACC1", "CUST1", BigDecimal.valueOf(100));
 
 		final BankAccountService bankAccountService = new BankAccountService(account);

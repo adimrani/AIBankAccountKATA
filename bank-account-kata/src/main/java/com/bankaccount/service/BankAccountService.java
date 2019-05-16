@@ -16,7 +16,7 @@ public class BankAccountService {
 		this.bankAccount = bankAccount;
 	}
 
-	public void withdraw(BigDecimal withdrawalAmount) {
+	public void withdraw(BigDecimal withdrawalAmount) throws UnsuffcientBalanceException{
 		final BigDecimal actualBalanceValue = bankAccount.getBalance();
 		if (actualBalanceValue.compareTo(withdrawalAmount) > 0) {
 			bankAccount.setBalance(actualBalanceValue.subtract(withdrawalAmount));
